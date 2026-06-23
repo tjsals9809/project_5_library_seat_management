@@ -185,7 +185,7 @@ flowchart TD
 **❓ 원인 분석**
 
 - 실제 사용한 RFID 태그의 UID 값이 MFRC522(RC522) RFID 모듈에서 일반적으로 사용하는 예시 UID 값과 달라 일치하지 않았음
-- 
+  
 **❗ 해결 방법**
 
 - Serial Monitor에 출력으로 UID 값을 확인 후 UID 값을 수정
