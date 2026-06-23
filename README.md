@@ -31,19 +31,7 @@ Basys3 FPGA 보드와 Vivado Block Design을 기반으로 구현한 **도서관 
 <p>
   <img src="https://img.shields.io/badge/Basys3-FPGA-red?style=for-the-badge">
   <img src="https://img.shields.io/badge/MicroBlaze-RISC--V-green?style=for-the-badge">
-  <img src="https://img.shields.io/badge/AXI-GPIO-yellow?style=for-the-badge">
-  <img src="https://img.shields.io/badge/AXI-UARTLite-lightgrey?style=for-the-badge">
-  <img src="https://img.shields.io/badge/AXI-Quad%20SPI-purple?style=for-the-badge">
-  <img src="https://img.shields.io/badge/AXI-Timer-black?style=for-the-badge">
-</p>
 
-### 3.3 Development Environment (개발 환경)
-
-<p>
-  <img src="https://img.shields.io/badge/Xilinx-Vivado-orange?style=for-the-badge">
-  <img src="https://img.shields.io/badge/AMD-Vitis-red?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Ubuntu-24.04-purple?style=for-the-badge">
-</p>
 
 ---
 
@@ -148,9 +136,9 @@ flowchart TD
     O --> E
 ```
 
----
 
-## 🔌 6. I/O Control (입출력 제어)
+
+###  5.3. I/O Control (입출력 제어)
 
 | Input / Output | Function |
 |---|---|
@@ -164,154 +152,11 @@ flowchart TD
 | `usb_uart_rxd` | UART 수신 |
 | `usb_uart_txd` | UART 송신 |
 
----
 
-## 🧩 7. Main IP Blocks (주요 IP 구성)
 
-### 7.1 `microblaze_riscv_0`
 
-시스템의 중앙 제어를 담당하는 프로세서입니다.
 
-주요 역할:
-
-  * LCD 출력 제어
-  * SPI 외부 모듈 통신 제어
-  * UART를 통한 디버깅 메시지 송수신
-  * 좌석 상태 관리 로직 수행
-
----
-
-### 7.2 `axi_gpio_lcd`
-
-LCD와 연결되는 GPIO 출력 IP입니다.
-
-주요 역할:
-
-  * 6bit LCD 제어 신호 출력
-  * LCD 명령어 및 데이터 전달
-  * 좌석 상태 메시지 표시
-
----
-
-### 7.3 `axi_quad_spi_0`
-
-SPI 기반 외부 모듈과 통신하기 위한 IP입니다.
-
-주요 역할:
-
-  * SPI Clock, Slave Select, Data 신호 제어
-  * RFID 또는 SPI 센서 모듈과의 통신 구조 제공
-  * 사용자 인식 또는 외부 입력 확장에 활용
-
----
-
-### 7.4 `axi_uartlite_0`
-
-PC와 UART 통신을 수행하는 IP입니다.
-
-주요 역할:
-
-  * 시리얼 모니터를 통한 디버깅 출력
-  * 시스템 상태 메시지 확인
-  * 좌석 등록/반납 과정 확인
-
----
-
-### 7.5 `axi_timer_0`
-
-시간 기반 제어를 담당하는 IP입니다.
-
-주요 역할:
-
-  * LCD 갱신 주기 관리
-  * 좌석 이용 시간 계산
-  * 주기적 상태 확인 이벤트 생성
-
----
-
-### 7.6 `axi_smc`
-
-MicroBlaze RISC-V와 여러 AXI 주변장치를 연결하는 SmartConnect IP입니다.
-
-주요 역할:
-
-  * AXI UARTLite, AXI GPIO, AXI Timer, AXI Quad SPI 연결
-  * 주소 기반 주변장치 접근 지원
-  * MicroBlaze 중심의 시스템 버스 구성
-
----
-
-## 🗺️ 8. Address Map (주소 맵)
-
-| Peripheral | Base Address | Range |
-|---|---:|---:|
-| AXI GPIO LCD | `0x40000000` | `64K` |
-| AXI UARTLite | `0x40600000` | `64K` |
-| AXI Timer | `0x41C00000` | `64K` |
-| AXI Quad SPI | `0x44A00000` | `64K` |
-| Local Memory | `0x00000000` | `128K` |
-
----
-
-## 🧭 9. Operation Flow (동작 흐름)
-
-### 9.1 Seat Check-In (좌석 이용 등록)
-
-```txt
-1. 시스템 전원 인가
-2. MicroBlaze RISC-V 초기화
-3. LCD, UART, Timer, SPI 초기화
-4. 사용자 입력 또는 외부 모듈 입력 대기
-5. 좌석 사용 가능 여부 확인
-6. 사용 가능한 좌석이 있으면 좌석 배정
-7. 좌석 상태를 사용 중으로 변경
-8. LCD에 좌석 이용 안내 문구 출력
-9. UART로 현재 상태 디버깅 출력
-```
-
----
-
-### 9.2 Seat Check-Out (좌석 반납)
-
-```txt
-1. 반납 입력 또는 사용자 인식
-2. 현재 사용 중인 좌석 정보 확인
-3. 해당 좌석 상태를 빈자리로 변경
-4. LCD에 반납 완료 문구 출력
-5. 좌석 상태 갱신
-6. 다음 사용자 입력 대기
-```
-
----
-
-### 9.3 Error Handling (오류 처리)
-
-```txt
-1. 사용 가능한 좌석이 없는 경우
-2. 이미 사용 중인 좌석을 다시 선택한 경우
-3. 등록되지 않은 사용자 정보가 입력된 경우
-4. SPI 외부 모듈 통신이 정상적으로 이루어지지 않는 경우
-5. LCD 출력이 초기화되지 않은 경우
-6. 오류 메시지를 LCD 또는 UART로 출력
-```
-
----
-
-## 🖼️ 10. Image Preview (이미지)
-
-### 10.1 Final Product (완성품)
-
-<p>
-  <img src="./images/library_seat.jpg" alt="Library Seat Final Product" width="500">
-</p>
-
-### 10.2 LCD Display (LCD 출력 화면)
-
-<p>
-  <img src="./images/lcd_display.jpg" alt="LCD Display" width="500">
-</p>
-
-### 10.3 Vivado Block Design (Vivado 블록 디자인)
+## 🖼️ 6. Vivado Block Design (Vivado 블록 디자인)
 
 <p>
   <img src="./images/block_design.jpg" alt="Vivado Block Design" width="700">
