@@ -148,10 +148,9 @@ flowchart TD
 | `usb_uart_txd` | UART 송신 |
 
 
-<br>
 
 
-## 🖼️ 6. Vivado Block Design (Vivado 블록 디자인)
+### 5.4. Vivado Block Design (Vivado 블록 디자인)
 
 <br>
 
@@ -160,7 +159,7 @@ flowchart TD
 <br>
 
 
-## 🎬 7. Demonstration (시연 영상)
+## 🎬 6. Demonstration (시연 영상)
 
 <br><br>
 
@@ -174,9 +173,9 @@ flowchart TD
 
 <br><br>
 
-## 🛠️ 8. Troubleshooting (문제 해결 기록)
+## 🎯 7. Troubleshooting (문제 해결 기록)
 
-### 8.1 RFID UID 불일치 문제
+### 7.1 RFID UID 불일치 문제
 
 **🔍 문제 상황**
 
@@ -196,7 +195,7 @@ flowchart TD
 
 <br>
 
-### 8.2 RFID 카드가 여러 번 인식되는 문제
+### 7.2 RFID 카드가 여러 번 인식되는 문제
 
 **🔍 문제 상황**
 
@@ -216,7 +215,7 @@ flowchart TD
 
 <br>
 
-## 🔧 9. Future Improvements (개선 사항)
+## 🔧 8. Future Improvements (개선 사항)
 
   * RFID 카드 UID를 사용자 정보와 매칭하여 실제 사용자의 좌석 이용 관리 기능 추가
   * Bluetooth 모듈을 추가하여 모바일 화면에서 좌석 상태 확인
