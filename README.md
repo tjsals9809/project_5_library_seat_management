@@ -175,7 +175,7 @@ flowchart TD
 
 ## 🎯 7. Troubleshooting (문제 해결 기록)
 
-### 7.1 RFID UID 불일치 문제
+### ⚠️ 7.1 RFID UID 불일치 문제
 
 **🔍 문제 상황**
 
@@ -195,7 +195,7 @@ flowchart TD
 
 <br>
 
-### 7.2 RFID 카드가 여러 번 인식되는 문제
+### ⚠️ 7.2 RFID 카드가 여러 번 인식되는 문제
 
 **🔍 문제 상황**
 
